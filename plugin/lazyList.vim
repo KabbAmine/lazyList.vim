@@ -1,5 +1,6 @@
 " Be lazy & create your lists quickly and easily.
 
+" VERSION      : 0.1
 " CREATION     : 2015-08-10
 " MODIFICATION : 2015-08-12
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
