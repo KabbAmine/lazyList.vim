@@ -286,12 +286,12 @@ Element 3
 
 | Command                      | Use pattern                          | Produces                                                                                |
 | -------                      | -------                              | -------                                                                                 |
-| `:LazyList`                  | `'%1%. '` *(The one by default)* | **1. **Element 1<br />**2. **Element 2<br />**3. **Element 3                            |
-| `:LazyList 'Chapter %3% - '` | `'Chapter %3% - '`                   | **Chapter 3 - **Element 1<br />**Chapter 4 - **Element 2<br />**Chapter 5 - **Element 3 |
-| `:LazyList '1.%2%. '`        | `'1.%2%. '`                          | **1.2. **Element 1<br />**1.3. **Element 2<br />**1.4. **Element 3                      |
-| `:LazyList '1 '`               | `'1 '`                                 | **1 **Element 1<br />**1 **Element 2<br />**1 **Element 3                                  |
-| `:LazyList + `               | `+ `                                 | **+**Element 1<br />**+**Element 2<br />**+**Element 3                                  |
-| `:LazyList '+ '`             | `'+ '`                               | **+ **Element 1<br />**+ **Element 2<br />**+ **Element 3                               |
+| `:LazyList`                  | `'%1%. '` *(The one by default)* | <strong>1. </strong>Element 1<br /><strong>2. </strong>Element 2<br /><strong>3. </strong>Element 3                            |
+| `:LazyList 'Chapter %3% - '` | `'Chapter %3% - '`                   | <strong>Chapter 3 - </strong>Element 1<br /><strong>Chapter 4 - </strong>Element 2<br /><strong>Chapter 5 - </strong>Element 3 |
+| `:LazyList '1.%2%. '`        | `'1.%2%. '`                          | <strong>1.2. </strong>Element 1<br /><strong>1.3. </strong>Element 2<br /><strong>1.4. </strong>Element 3                      |
+| `:LazyList '1 '`               | `'1 '`                                 | <strong>1 </strong>Element 1<br /><strong>1 </strong>Element 2<br /><strong>1 </strong>Element 3                                  |
+| `:LazyList + `               | `+ `                                 | <strong>+</strong>Element 1<br /><strong>+</strong>Element 2<br /><strong>+</strong>Element 3                                  |
+| `:LazyList '+ '`             | `'+ '`                               | <strong>+ </strong>Element 1<br /><strong>+ </strong>Element 2<br /><strong>+ </strong>Element 3                               |
 
 So as you can see, `%number%` is a special pattern for the plugin, it tells him to produce indices starting from the given `number`.
 Another special patterns will be added in the future.
