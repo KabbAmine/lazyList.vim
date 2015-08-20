@@ -1,14 +1,14 @@
 LazyList, <small>a quick way to create lists in Vim</small>
 ==============================================================
 
-<div style="text-align:right">[Description](#description) | [Installation](#installation) | [How to use](#usage) | [How it works](#howitworks) | [Configuration](#configuration) | [TODO](#todo) | [Notes](#notes)</div>
+[Description](#description) | [Installation](#installation) | [How to use](#usage) | [How it works](#howitworks) | [Configuration](#configuration) | [TODO](#todo) | [Notes](#notes)
 
 Description <a id="description"></a>
 -----------
 
 LazyList is a vim plugin who gives you possibility to create ordered and non ordered lists very quickly, and this by adding indices to the beginning of each line in the current selection.
 
-<div style="text-align:center">![LazyList example](.img/main.gif)</div>
+![LazyList main example](.img/main.gif)
 
 Installation <a id="installation"></a>
 ------------
@@ -137,7 +137,7 @@ Lo_rem ipsum
 
 A super gif to illustrate the example:
 
-<div style="text-align:center">![Unordered list example](.img/ex1.gif)</div>
+![Unordered list example](.img/ex1.gif)
 
 Pretty quick, isn't it? :smile:
 
