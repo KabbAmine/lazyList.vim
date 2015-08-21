@@ -181,7 +181,13 @@ fun! lazyList#ToggleList() dict " {{{1
 		" (2) ... if yes, remove all of them
 		for l:i in range(0, len(l:linesList) - 1)
 			let l:currentFirstCharIndex = match(l:linesList[l:i], '\S')
-			let l:linesList[l:i] = strpart(l:linesList[l:i], 0, l:currentFirstCharIndex) . strpart(l:linesList[l:i], l:currentFirstCharIndex + strlen(l:indicies[l:i]))
+			if match(l:linesList[l:i][expand(l:currentFirstCharIndex):], escape(l:indicies[l:i], '-^$ ./[{}]')) ==# 0
+				let l:linesList[l:i] = strpart(l:linesList[l:i], 0, l:currentFirstCharIndex) . strpart(l:linesList[l:i], l:currentFirstCharIndex + strlen(l:indicies[l:i]))
+			else
+				" If no index is present (e.g A new line was inserted), we go to
+				" the next one (Works only for marks).
+				let l:i -= 1
+			endif
 		endfor
 		let l:initialPos[2] -= l:indexLen
 	else

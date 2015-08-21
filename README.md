@@ -10,6 +10,10 @@ LazyList is a vim plugin who gives you possibility to create ordered and non ord
 
 ![LazyList main example](.img/main.gif)
 
+With non numerical indices, the plugin can even act smartly:
+
+![TODO example](.img/todo.gif)
+
 Installation <a id="installation"></a>
 ------------
 
