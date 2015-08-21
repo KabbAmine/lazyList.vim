@@ -18,7 +18,7 @@ set cpoptions&vim
 " }}}
 
 " Main command {{{1
-command! -bar -range -nargs=? LazyList :let s:lazyList = {}
+command! -bar -range=% -nargs=? LazyList :let s:lazyList = {}
 			\| if !empty(getline('.'))
 				\| let s:lazyList = lazyList#New(<line1>, <line2>, <f-args>)
 				\| call s:lazyList.init()

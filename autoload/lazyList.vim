@@ -1,7 +1,7 @@
 " Lazy list global dictionnary.
 
 " CREATION     : 2015-08-10
-" MODIFICATION : 2015-08-14
+" MODIFICATION : 2015-08-21
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
 " LICENSE      : The MIT License (MIT)
 
@@ -44,7 +44,9 @@ fun! lazyList#GetSelection() dict " {{{1
 	let l:end = self.end
 	let l:lines = self.lines
 
-	if l:lines ==# 1
+	" If the number of selected lines is not equal to the number of file's 
+	" lines, then we execute the NORMAL mode behavior.
+	if l:lines ==# line('$')
 
 		" NORMAL mode ---> 
 		"	Automatically select paragraph delimited by 2 empty lines or

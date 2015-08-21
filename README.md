@@ -219,7 +219,7 @@ How it works <a id="howitworks"></a>
 
 ### The selection
 
-In VISUAL mode, you just select the lines you want (Select one line doesn't count).
+In VISUAL mode, you just select the lines you want.
 
 In NORMAL mode, the selection is automatically calculated depending on the current cursor position, it can be:
 - An indented block.
