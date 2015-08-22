@@ -127,7 +127,7 @@ I change a few things ...
 1002- Lo_rem ipsum
 ```
 
-... And now after thinking, I want to remove all those indices, so using the same command `:LazyList '%2%. '` I can do that.
+... And now after thinking, I want to remove all those indices, so using the same command `:LazyList '%2%- '` I can do that.
 
 ```
 This is element 1
@@ -168,6 +168,7 @@ Or in a better way, you can create them dynamically using the `g:lazylist_maps` 
 Setting `g:lazylist_maps` variable in your vimrc will generate dynamically your mappings with their patterns.
 
 This variable is a list containing 2 values:
+
 1. The prefix key
 2. A dictionary containing the keys and their patterns.
 
