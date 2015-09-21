@@ -1,0 +1,45 @@
+# #####################################
+#   The text motion from selection object
+# #####################################
+
+Given (A paragraph):
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+      Lorem ipsum dolor sit amet
+      Consetetur sadipscing elitr
+      Sed diam voluptua.
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+# Delete & replace + motion
+
+Do (Delete + motion):
+  dil
+
+Expect ():
+      Lorem ipsum dolor sit amet
+      Consetetur sadipscing elitr
+      Sed diam voluptua.
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+Do (Delete + motion):
+  3jdil
+
+Expect ():
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+Do (Replace + motion):
+# 1st two lines
+  5jcilFoo bar
+
+Expect ():
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+      Lorem ipsum dolor sit amet
+      Consetetur sadipscing elitr
+      Sed diam voluptua.
+  Foo bar

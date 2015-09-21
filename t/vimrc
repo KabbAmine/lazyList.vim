@@ -3,3 +3,6 @@ set rtp+=../../lazyList/
 set rtp+=vader.vim
 filetype plugin indent on
 syntax enable
+
+" LazyList options
+let g:lazylist_omap = 'il'
