@@ -316,7 +316,7 @@ TODO <a id="todo"></a>
 - [ ] Take account the commented lines (?)
 - [ ] Possibility to use more than one special pattern
 - [ ] Make README more understandable (A PR from someone maybe?)
-- [ ] Add test cases (Vader?)
+- [X] Add test cases (Vader?)
 
 My configuration <a id="myconfiguration"></a>
 ----------------

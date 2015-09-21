@@ -1,0 +1,5 @@
+# Before (Set config):
+#   setlocal filetype=markdown
+
+Include: inc/selection.vader
+Include: inc/index.vader

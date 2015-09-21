@@ -1,0 +1,24 @@
+# ###################
+#   Index dict
+# ###################
+
+Given ():
+  Nothing else matters
+
+Execute (ll#index of numerical indicies):
+# Of ''
+  let li = ll#index#New('').init()
+  AssertEqual li.parsed, 1
+  AssertEqual li.pre, ''
+  AssertEqual li.post, '. '
+# Of 'Chapter 00%2%.a. '
+  let li = ll#index#New('Chapter 00%2%.a. ').init()
+  AssertEqual li.parsed, 2
+  AssertEqual li.pre, 'Chapter 00'
+  AssertEqual li.post, '.a. '
+# Of '%%10%%%'
+  let li = ll#index#New('%%10%%%').init()
+  AssertEqual li.parsed, 10
+  AssertEqual li.pre, '%'
+  AssertEqual li.post, '%%'
+  unlet li

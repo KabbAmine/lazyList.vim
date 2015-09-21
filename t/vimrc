@@ -1,0 +1,5 @@
+filetype off
+set rtp+=../../lazyList/
+set rtp+=vader.vim
+filetype plugin indent on
+syntax enable

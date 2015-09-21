@@ -1,0 +1,65 @@
+# ###################
+#   Selection dict
+# ###################
+
+# NORMAL mode
+
+Given (3 paragraphs):
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+    Lorem ipsum dolor sit amet
+    Consetetur sadipscing elitr
+    Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+    Sed diam voluptua.
+
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+    Lorem ipsum dolor sit amet
+    Consetetur sadipscing elitr
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+Execute (ll#selection):
+# On 1st line
+  let ls = ll#selection#New(1, line('$')).init()
+  AssertEqual ls.start, 1
+  AssertEqual ls.end, 2
+  unlet ls
+# On 5th line
+  normal! 4j
+  let ls = ll#selection#New(1, line('$')).init()
+  AssertEqual ls.start, 3
+  AssertEqual ls.end, 6
+# On 2nd paragraph
+  normal! 3j
+  let ls = ll#selection#New(1, line('$')).init()
+  AssertEqual ls.start, 8
+  AssertEqual ls.end, 9
+# On indented text of 3rd paragraph
+  normal! 3j
+  let ls = ll#selection#New(1, line('$')).init()
+  AssertEqual ls.start, 11
+  AssertEqual ls.end, 12
+# On last line
+  normal! 2j
+  let ls = ll#selection#New(1, line('$')).init()
+  AssertEqual ls.start, 13
+  AssertEqual ls.end, 14
+  unlet ls
+
+Expect ():
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+    Lorem ipsum dolor sit amet
+    Consetetur sadipscing elitr
+    Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+    Sed diam voluptua.
+
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+    Lorem ipsum dolor sit amet
+    Consetetur sadipscing elitr
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
