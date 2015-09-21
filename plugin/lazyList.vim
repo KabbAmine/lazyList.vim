@@ -1,8 +1,8 @@
 " Be lazy & create your lists quickly and easily.
 
-" VERSION      : 0.3
+" VERSION      : 0.6
 " CREATION     : 2015-08-10
-" MODIFICATION : 2015-08-21
+" MODIFICATION : 2015-09-22
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
 " LICENSE      : The MIT License (MIT)
 
