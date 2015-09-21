@@ -1,133 +1,27 @@
-" Lazy list global dictionnary.
-
 " CREATION     : 2015-08-10
-" MODIFICATION : 2015-08-21
-" MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
-" LICENSE      : The MIT License (MIT)
+" MODIFICATION : 2015-09-21
 
 fun! lazyList#New(start, end, ...) abort " {{{1
 
 	let l:index = exists('a:1') ? a:1 : ''
 
 	return {
-				\ 'init'         : function('lazyList#Init'),
 				\ 'indexList'    : [],
 				\ 'outputList'   : [],
-				\ 'toggle'       : function('lazyList#ToggleList'),
-				\ 'getIndexList' : function('lazyList#GetIndexList'),
-				\ 'selection': {
-					\ 'start' : a:start,
-					\ 'end'   : a:end,
-					\ 'lines' : a:end - a:start + 1,
-					\ 'list'  : [],
-					\ 'get'   : function('lazyList#GetSelection')
-				\ },
-				\ 'index': {
-					\ 'input'  : l:index,
-					\ 'full'   : '',
-					\ 'parsed' : '',
-					\ 'pre'    : '',
-					\ 'post'   : '',
-					\ 'type'   : '',
-					\ 'get'    : function('lazyList#GetIndex')
-				\ }
+				\ 'init'         : function('s:Init'),
+				\ 'toggle'       : function('s:ToggleList'),
+				\ 'getIndexList' : function('s:GetIndexList'),
+				\ 'selection'    : ll#selection#New(a:start, a:end).init(),
+				\ 'index'        : ll#index#New(l:index).init()
 			\ }
 endfun
 " 1}}}
 
-fun! lazyList#GetSelection() dict " {{{1
-	" Method for lazylist.selection which:
-	"	- Define first & last lines in start & end properties.
-	"	- Return a list of the selection's lines.
-
-	let l:start = self.start
-	let l:end = self.end
-	let l:lines = self.lines
-
-	" If the number of selected lines is not equal to the number of file's 
-	" lines, then we execute the NORMAL mode behavior.
-	if l:lines ==# line('$')
-
-		" NORMAL mode ---> 
-		"	Automatically select paragraph delimited by 2 empty lines or
-		"	different indentation size.
-		let l:currLine = line('.')
-
-		" Get 1st line
-		let l:line = l:currLine
-		while indent(l:line) ==# indent(l:currLine)
-			let l:line -= 1
-		endwhile
-		let l:firstDiffIndLine = l:line
-		let l:firstEmptyLine = search('^$', 'nb', 1)
-		if !l:firstDiffIndLine && !l:firstEmptyLine
-			let l:firstLine = 1
-		else
-			let l:firstLine = max([l:firstDiffIndLine, l:firstEmptyLine]) + 1
-		endif
-
-		" Get last line
-		let l:line = l:currLine
-		while indent(l:line) ==# indent(l:currLine)
-			let l:line += 1
-		endwhile
-		let l:lastDiffIndLine = l:line
-		let l:lastEmptyLine = search('^$', 'n', line('$'))
-		if !l:lastDiffIndLine && !l:lastEmptyLine
-			let l:lastLine = line('$')
-		elseif !l:lastEmptyLine && l:lastDiffIndLine
-			let l:lastLine = l:lastDiffIndLine - 1
-		else
-			let l:lastLine = min([l:lastDiffIndLine, l:lastEmptyLine]) - 1
-		endif
-
-	else
-		" VISUAL mode --->
-		"	The first & last lines are already known (Provided by the
-		"	command).
-		"
-		let l:firstLine = l:start
-		let l:lastLine = l:end
-	endif
-
-	let self.start = l:firstLine
-	let self.end = l:lastLine
-
-	return getline(self.start, self.end)
-
+fun! s:Init() dict " {{{1
+	let self.indexList = self.getIndexList()
+	return self
 endfun
-fun! lazyList#GetIndex() dict " {{{1
-	" Method for lazylist.index which:
-	"	- Define pre, post & full index and his type (num, mark).
-	"	- Return a formatted index.
-
-	let l:index = !empty(self.input) ? self.input : '%1%. '
-	" Remove quotes if they are present
-	if l:index =~# '^[''""].*[''""]$'
-		let l:index = strpart(l:index, 1, len(l:index) - 2)
-	endif
-
-	if l:index =~# '%\d%'
-		let l:type = 'num'
-		let l:preInd = substitute(l:index, '^\(.*\)%\d%.*$', '\1', '')
-		let l:postInd = substitute(l:index, '^.*%\d%\(.*\)$', '\1', '')
-		let l:parsInd = substitute(l:index, '^.*%\(\d\)%.*$', '\1', '')
-	else
-		let l:type = 'mark'
-		let l:parsInd = l:index
-		let l:preInd = ''
-		let l:postInd = ''
-	endif
-
-	let self.pre = l:preInd
-	let self.post = l:postInd
-	let self.full = l:index
-	let self.type = l:type
-
-	return l:parsInd
-
-endfun
-fun! lazyList#GetIndexList() dict " {{{1
+fun! s:GetIndexList() dict " {{{1
 	" Method for lazylist.index which:
 	"	- Return a list of indicies (pre + ind + post)
 
@@ -158,7 +52,7 @@ fun! lazyList#GetIndexList() dict " {{{1
 
 	return l:indicies
 endfun
-fun! lazyList#ToggleList() dict " {{{1
+fun! s:ToggleList() dict " {{{1
 	" Method for lazylist which add or remove indicies.
 
 	let l:Selection = self.selection
@@ -204,17 +98,6 @@ fun! lazyList#ToggleList() dict " {{{1
 	endfor
 
 	call setpos('.', l:initialPos)
-endfun
-fun! lazyList#Init() dict " {{{1
-	" Initialize what needed for lazylist (A kind of constructor)
-
-	let l:Selection = self.selection
-	let l:Index = self.index
-
-	let l:Selection.list = l:Selection.get()
-	let l:Index.parsed = l:Index.get()
-
-	let self.indexList = self.getIndexList()
 endfun
 " 1}}}
 
