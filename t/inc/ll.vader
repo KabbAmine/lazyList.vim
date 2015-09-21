@@ -1,0 +1,62 @@
+# ###################
+#   Main functions
+# ###################
+
+# In NORMAL mode
+
+Given (2 paragraphs):
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+    Lorem ipsum dolor sit amet
+    Consetetur sadipscing elitr
+
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+Execute (:LazyList ...):
+# Ordered list for first 2 lines
+  norma! fs
+  AssertEqual getpos('.')[2], 9
+  LazyList
+  AssertEqual getpos('.')[2], 12
+# Non-ordered list for indented text
+  norma! 3j$
+  AssertEqual getpos('.')[2], 29
+  LazyList 'Foo %10% bar - '
+  AssertEqual getpos('.')[2], 42
+# Simple + list for the 3rd paragraph
+  norma! G^fm
+  AssertEqual getpos('.')[2], 8
+  LazyList +
+  AssertEqual getpos('.')[2], 9
+
+Expect ():
+  1. Lorem ipsum dolor sit amet
+  2. Consetetur sadipscing elitr
+    Foo 10 bar - Lorem ipsum dolor sit amet
+    Foo 11 bar - Consetetur sadipscing elitr
+
+  +Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  +Sed diam voluptua.
+
+# In VISUAL mode
+
+Given (A paragraph):
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+    Lorem ipsum dolor sit amet
+    Consetetur sadipscing elitr
+  Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.
+
+Do (:LazyList in a visual selection):
+  jjVjj:
+  LazyList 'Line 0%1% => '\<CR>
+
+Expect ():
+  Lorem ipsum dolor sit amet
+  Consetetur sadipscing elitr
+    Line 01 => Lorem ipsum dolor sit amet
+    Line 02 => Consetetur sadipscing elitr
+  Line 03 => Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
+  Sed diam voluptua.

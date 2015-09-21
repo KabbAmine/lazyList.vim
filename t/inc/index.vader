@@ -5,7 +5,9 @@
 Given ():
   Nothing else matters
 
-Execute (ll#index of numerical indicies):
+# Numerical indices
+
+Execute (ll#index of numerical indices):
 # Of ''
   let li = ll#index#New('').init()
   AssertEqual li.parsed, 1
@@ -22,3 +24,17 @@ Execute (ll#index of numerical indicies):
   AssertEqual li.pre, '%'
   AssertEqual li.post, '%%'
   unlet li
+
+# Non-numerical indices
+
+Execute (ll#index of non numerical indices):
+# Of a simple string
+  let li = ll#index#New('Part A.a-1').init()
+  AssertEqual li.parsed, 'Part A.a-1'
+  AssertEqual li.pre, ''
+  AssertEqual li.post, ''
+# Of random symbols
+  let li = ll#index#New('%#"(-[{}])%').init()
+  AssertEqual li.parsed, '%#"(-[{}])%'
+  AssertEqual li.pre, ''
+  AssertEqual li.post, ''
