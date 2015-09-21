@@ -31,11 +31,11 @@ fun! s:Get() dict " {{{1
 		let l:index = strpart(l:index, 1, len(l:index) - 2)
 	endif
 
-	if l:index =~# '%\d%'
+	if l:index =~# '\v\%\d{1,}\%'
 		let l:type = 'num'
-		let l:preInd = substitute(l:index, '^\(.*\)%\d%.*$', '\1', '')
-		let l:postInd = substitute(l:index, '^.*%\d%\(.*\)$', '\1', '')
-		let l:parsInd = substitute(l:index, '^.*%\(\d\)%.*$', '\1', '')
+		let l:preInd = substitute(l:index, '\v^(.*)\%\d{1,}\%.*$', '\1', '')
+		let l:postInd = substitute(l:index, '\v^.*\%\d{1,}\%(.*)$', '\1', '')
+		let l:parsInd = substitute(l:index, '\v^.*\%(\d{1,})\%.*$', '\1', '')
 	else
 		let l:type = 'mark'
 		let l:parsInd = l:index
