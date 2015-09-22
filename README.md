@@ -14,6 +14,10 @@ With non numerical indices, the plugin can even act smartly:
 
 ![TODO example](.img/todo.gif)
 
+As a bonus, the [selection algorithm](#selection) of the plugin can be used as a [motion](http://vimdoc.sourceforge.net/htmldoc/motion.html) command, refer to the [configuration part](#motion).
+
+![Motion example](.img/motion.gif)
+
 Installation <a id="installation"></a>
 ------------
 
@@ -217,12 +221,22 @@ vnoremap glp1 :LazyList 'Part %1%. '<CR>
 
 **P.S:** *In fact, the generated mappings will use `<Plug>` instead of directly using the command `LazyList`.*
 
+### Map the motion command <a id="motion"></a>
+
+If you want to use the lazyList selection algorithm as a motion command, simply assign a mapping in `g:lazylist_omap` variable.
+
+e.g.
+```
+let g:lazylist_omap = 'il'
+```
+---------------------------------------------------------------
+
 Check my [configuration](#myconfiguration) for more examples.
 
 How it works <a id="howitworks"></a>
 ------------
 
-### The selection
+### The selection <a id="selection"></a>
 
 In VISUAL mode, you just select the lines you want.
 
@@ -230,6 +244,8 @@ In NORMAL mode, the selection is automatically calculated depending on the curre
 - An indented block.
 - A block surrounded by empty lines.
 - A block surrounded by text of different indentation.
+
+You can use this selection as a motion command, see [here](#motion).
 
 Here are some examples of automatic selection:
 
@@ -315,7 +331,7 @@ TODO <a id="todo"></a>
 - [ ] Add new special patterns
 - [ ] Take account the commented lines (?)
 - [ ] Possibility to use more than one special pattern
-- [ ] Make README more understandable (A PR from someone maybe?)
+- [ ] Make README more understandable
 - [X] Add test cases (Vader?)
 
 My configuration <a id="myconfiguration"></a>
@@ -323,8 +339,10 @@ My configuration <a id="myconfiguration"></a>
 
 This is my configuration:
 ```
+" Note the space after the command
 nnoremap gli :LazyList 
 vnoremap gli :LazyList 
+let g:lazylist_omap = 'il'
 let g:lazylist_maps = [
 			\ 'gl',
 			\ {
