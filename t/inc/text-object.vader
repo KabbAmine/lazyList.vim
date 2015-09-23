@@ -1,5 +1,5 @@
 # #####################################
-#   The text motion from selection object
+#   The text-object from selection dict
 # #####################################
 
 Given (A paragraph):
@@ -11,9 +11,9 @@ Given (A paragraph):
   Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
   Sed diam voluptua.
 
-# Delete & replace + motion
+# Delete & replace + text-object
 
-Do (Delete + motion):
+Do (Delete + text-object):
   dil
 
 Expect ():
@@ -23,7 +23,7 @@ Expect ():
   Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
   Sed diam voluptua.
 
-Do (Delete + motion):
+Do (Delete + text-object):
   3jdil
 
 Expect ():
@@ -32,7 +32,7 @@ Expect ():
   Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat
   Sed diam voluptua.
 
-Do (Replace + motion):
+Do (Replace + text-object):
 # 1st two lines
   5jcilFoo bar
 

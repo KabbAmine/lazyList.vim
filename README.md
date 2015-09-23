@@ -14,9 +14,9 @@ With non numerical indices, the plugin can even act smartly:
 
 ![TODO example](.img/todo.gif)
 
-As a bonus, the [selection algorithm](#selection) of the plugin can be used as a [motion](http://vimdoc.sourceforge.net/htmldoc/motion.html) command, refer to the [configuration part](#motion).
+As a bonus, the [selection algorithm](#selection) of the plugin can be used as a text-object, refer to the [configuration part](#text-object).
 
-![Motion example](.img/motion.gif)
+![Text-object visual selection](.img/motion.gif)
 
 Installation <a id="installation"></a>
 ------------
@@ -221,9 +221,9 @@ vnoremap glp1 :LazyList 'Part %1%. '<CR>
 
 **P.S:** *In fact, the generated mappings will use `<Plug>` instead of directly using the command `LazyList`.*
 
-### Map the motion command <a id="motion"></a>
+### Map the text-object <a id="text-object"></a>
 
-If you want to use the lazyList selection algorithm as a motion command, simply assign a mapping in `g:lazylist_omap` variable.
+If you want to use the lazyList selection algorithm as a text-object, simply assign a mapping in `g:lazylist_omap` variable.
 
 e.g.
 ```
@@ -245,7 +245,7 @@ In NORMAL mode, the selection is automatically calculated depending on the curre
 - A block surrounded by empty lines.
 - A block surrounded by text of different indentation.
 
-You can use this selection as a motion command, see [here](#motion).
+You can use this selection as a text-object, see [here](#text-object).
 
 Here are some examples of automatic selection:
 
