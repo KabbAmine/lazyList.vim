@@ -1,6 +1,9 @@
 LazyList, <small>a quick way to create lists in Vim</small>
 ==============================================================
 
+![Badge version](https://img.shields.io/badge/version-0.6.1-blue.svg?style=flat-square "Badge for version")
+![License version](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square "Badge for license")
+
 [Description](#description) | [Installation](#installation) | [How to use](#usage) | [How it works](#howitworks) | [Configuration](#configuration) | [TODO](#todo) | [Notes](#notes)
 
 Description <a id="description"></a>
