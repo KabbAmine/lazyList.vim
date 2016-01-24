@@ -1,5 +1,5 @@
 " CREATION     : 2015-08-10
-" MODIFICATION : 2015-09-21
+" MODIFICATION : 2016-01-24
 
 fun! lazyList#New(start, end, ...) abort " {{{1
 
@@ -8,51 +8,19 @@ fun! lazyList#New(start, end, ...) abort " {{{1
 	return {
 				\ 'indexList'    : [],
 				\ 'outputList'   : [],
-				\ 'init'         : function('s:Init'),
-				\ 'toggle'       : function('s:ToggleList'),
-				\ 'getIndexList' : function('s:GetIndexList'),
+				\ 'init'         : function('lazyList#Init'),
+				\ 'toggle'       : function('lazyList#ToggleList'),
 				\ 'selection'    : ll#selection#New(a:start, a:end).init(),
 				\ 'index'        : ll#index#New(l:index).init()
 			\ }
 endfun
 " 1}}}
 
-fun! s:Init() dict " {{{1
-	let self.indexList = self.getIndexList()
+fun! lazyList#Init() dict " {{{1
+	let self.indexList = s:GetIndexList(self)
 	return self
 endfun
-fun! s:GetIndexList() dict " {{{1
-	" Method for lazylist.index which:
-	"	- Return a list of indicies (pre + ind + post)
-
-	let l:Index = self.index
-	let l:Selection = self.selection
-
-	let l:start = l:Selection.start
-	let l:end = l:Selection.end
-	let l:index = l:Index.parsed
-	let l:preInd = l:Index.pre | let l:postInd = l:Index.post
-	let l:typeInd = l:Index.type
-
-	let l:indicies = []
-	
-	if l:typeInd ==# 'num'
-		" Numerical indicies
-		let l:initialInd = l:index
-		let l:lastInd = l:end - l:start + l:initialInd
-		for l:i in range(l:initialInd, l:lastInd)
-			call add(l:indicies, l:preInd . l:i . l:postInd)
-		endfor
-	elseif l:typeInd ==# 'mark'
-		" Mark indicies
-		for l:i in range(1, l:end - l:start + 1)
-			call add(l:indicies, l:index)
-		endfor
-	endif
-
-	return l:indicies
-endfun
-fun! s:ToggleList() dict " {{{1
+fun! lazyList#ToggleList() dict " {{{1
 	" Method for lazylist which add or remove indicies.
 
 	let l:Selection = self.selection
@@ -100,5 +68,39 @@ fun! s:ToggleList() dict " {{{1
 	call setpos('.', l:initialPos)
 endfun
 " 1}}}
+
+fun! s:GetIndexList(ll) abort " {{{1
+	" Take a lazylist dict as arg and returns a list of indices (pre + ind + post)
+	" P.S: I'm using a normal function instead of a method to make it
+	" compatible with vim <= 7.4
+
+	let l:Index = a:ll.index
+	let l:Selection = a:ll.selection
+
+	let l:start = l:Selection.start
+	let l:end = l:Selection.end
+	let l:index = l:Index.parsed
+	let l:preInd = l:Index.pre | let l:postInd = l:Index.post
+	let l:typeInd = l:Index.type
+
+	let l:indicies = []
+	
+	if l:typeInd ==# 'num'
+		" Numerical indicies
+		let l:initialInd = l:index
+		let l:lastInd = l:end - l:start + l:initialInd
+		for l:i in range(l:initialInd, l:lastInd)
+			call add(l:indicies, l:preInd . l:i . l:postInd)
+		endfor
+	elseif l:typeInd ==# 'mark'
+		" Mark indicies
+		for l:i in range(1, l:end - l:start + 1)
+			call add(l:indicies, l:index)
+		endfor
+	endif
+
+	return l:indicies
+endfun
+" }}}
 
 " vim:ft=vim:fdm=marker:fmr={{{,}}}:

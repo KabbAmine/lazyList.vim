@@ -1,5 +1,5 @@
 " CREATION     : 2015-09-21
-" MODIFICATION : 2015-09-21
+" MODIFICATION : 2016-01-24
 
 fun! ll#selection#New(start, end, ...) abort " {{{1
 
@@ -8,17 +8,17 @@ fun! ll#selection#New(start, end, ...) abort " {{{1
 				\ 'end'   : a:end,
 				\ 'lines' : a:end - a:start + 1,
 				\ 'list'  : [],
-				\ 'init'  : function('s:Init'),
-				\ 'get'   : function('s:Get')
+				\ 'init'  : function('ll#selection#Init'),
+				\ 'get'   : function('ll#selection#Get')
 			\ }
 endfun
 " 1}}}
 
-fun! s:Init() dict " {{{1
+fun! ll#selection#Init() dict " {{{1
 	call self.get()
 	return self
 endfun
-fun! s:Get() dict " {{{1
+fun! ll#selection#Get() dict " {{{1
 	" Method which:
 	"	- Define first & last lines in start & end properties.
 	"	- Define a list containing the selection's lines.

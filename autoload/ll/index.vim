@@ -1,5 +1,5 @@
 " CREATION     : 2015-09-21
-" MODIFICATION : 2015-09-21
+" MODIFICATION : 2016-01-24
 
 fun! ll#index#New(index, ...) abort " {{{1
 
@@ -10,17 +10,17 @@ fun! ll#index#New(index, ...) abort " {{{1
 				\ 'pre'    : '',
 				\ 'post'   : '',
 				\ 'type'   : '',
-				\ 'init' : function('s:Init'),
-				\ 'get'  : function('s:Get')
+				\ 'init' : function('ll#index#Init'),
+				\ 'get'  : function('ll#index#Get')
 			\ }
 endfun
 " 1}}}
 
-fun! s:Init() dict " {{{1
+fun! ll#index#Init() dict " {{{1
 	call self.get()
 	return self
 endfun
-fun! s:Get() dict " {{{1
+fun! ll#index#Get() dict " {{{1
 	" Method which:
 	"	- Define pre, post & full index and his type (num, mark).
 	"	- Return a formatted index.
