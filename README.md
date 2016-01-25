@@ -24,6 +24,8 @@ As a bonus, the [selection algorithm](#selection) of the plugin can be used as a
 Installation <a id="installation"></a>
 ------------
 
+This plugin works great on vim `>=7.4`. If you are using version `7.3`, consider using the [fix-vim73 branch](https://github.com/KabbAmine/lazyList.vim/tree/fix-vim73).
+
 ### Manually
 
 Install the distributed files into Vim runtime directory which is usually `~/.vim/`, or `$HOME/vimfiles` on Windows.
@@ -161,7 +163,7 @@ The plugin doesn't set any mapping, so feel free to create your own ones with yo
 
 Example:
 
-```
+```vim
 nnoremap gll :LazyList<CR>
 vnoremap gll :LazyList<CR>
 nnoremap gl* :LazyList '* '<CR>
@@ -179,7 +181,7 @@ This variable is a list containing 2 values:
 1. The prefix key
 2. A dictionary containing the keys and their patterns.
 
-```
+```vim
 let g:lazylist_maps = [
 			\ <prefixKey>,
 			\ {
@@ -191,7 +193,7 @@ let g:lazylist_maps = [
 
 And this will generate:
 
-```
+```vim
 nnoremap <prefixKey + key> :LazyList 'pattern'<CR>
 vnoremap <prefixKey + key> :LazyList 'pattern'<CR>
 nnoremap <prefixKey + key2> :LazyList 'pattern2'<CR>
@@ -200,7 +202,7 @@ vnoremap <prefixKey + key2> :LazyList 'pattern2'<CR>
 
 So for example, this ...
 
-```
+```vim
 let g:lazylist_maps = [
 			\ 'gl',
 			\ {
@@ -213,7 +215,7 @@ let g:lazylist_maps = [
 
 ... will generate the following mappings:
 
-```
+```vim
 nnoremap gll :LazyList<CR>
 vnoremap gll :LazyList<CR>
 nnoremap gl- :LazyList '- '<CR>
@@ -229,7 +231,7 @@ vnoremap glp1 :LazyList 'Part %1%. '<CR>
 If you want to use the lazyList selection algorithm as a text-object, simply assign a mapping in `g:lazylist_omap` variable.
 
 e.g.
-```
+```vim
 let g:lazylist_omap = 'il'
 ```
 ---------------------------------------------------------------
@@ -322,7 +324,7 @@ Another special patterns will be added in the future.
 
 You can also prepend the command with a range:
 
-```
+```vim
 :.,+5LazyList '+ '
 :110,115LazyList '0%1%. '
 ```
@@ -341,7 +343,7 @@ My configuration <a id="myconfiguration"></a>
 ----------------
 
 This is my configuration:
-```
+```vim
 " Note the space after the command
 nnoremap gli :LazyList 
 vnoremap gli :LazyList 
